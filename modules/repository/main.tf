@@ -140,15 +140,9 @@ resource "github_repository" "this" {
 ## We still use 'master' as the default branch across all repos for consistency.
 ## We may change to 'main' one day, but would do so all at once in a coordinated manner.
 
-resource "github_branch" "master" {
-  repository    = github_repository.this.name
-  branch        = "master"
-  source_branch = "master"
-}
-
 resource "github_branch_default" "this" {
   repository = github_repository.this.name
-  branch     = github_branch.master.branch
+  branch     = "master"
 }
 
 resource "github_branch_protection" "protect_default_branch" {
